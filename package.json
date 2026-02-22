@@ -11,16 +11,21 @@
   "dependencies": {
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.22.0",
+    "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.0",
+    "gray-matter": "^4.0.3",
     "gsap": "^3.14.2",
     "matter-js": "^0.20.0",
     "motion": "^12.34.0",
     "next": "16.1.6",
+    "next-mdx-remote": "^6.0.0",
     "next-sanity": "^11.6.12",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "rehype-pretty-code": "^0.14.1",
     "sanity": "^4.22.0",
+    "shiki": "^3.22.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {

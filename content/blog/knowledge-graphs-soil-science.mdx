@@ -1,0 +1,71 @@
+---
+title: "Knowledge Graphs for Soil Science: Building a Semantic Layer for Soil Data Interoperability"
+date: "2025-11-15"
+description: "How SKOS-based ontologies and knowledge graphs can solve the fragmentation problem in soil science data, enabling semantic queries across heterogeneous soil datasets."
+tags: ["knowledge-graphs", "soil-science", "SKOS", "ontology", "semantic-web"]
+---
+
+Soil science suffers from a fundamental data problem: thousands of research groups, government agencies, and monitoring programmes produce soil data — but each uses its own vocabularies, classification systems, and data formats. A "sandy loam" in one dataset may not map cleanly to a "sandy loam" in another. Linking these datasets requires semantic interoperability, and that is exactly what knowledge graphs can provide.
+
+## The Fragmentation Problem
+
+Consider two national soil surveys that both measure "organic carbon." One reports in `g/kg`, the other in `%`. One calls it `SOC`, the other `OC`. Both reference different depth profiles. Integrating them requires resolving not just units but **conceptual alignment** — does "topsoil" in survey A correspond to "0–30 cm horizon" in survey B?
+
+This is not a data engineering problem. It is a **knowledge representation problem**.
+
+## SKOS: A Standard for Soil Vocabularies
+
+The [Simple Knowledge Organization System (SKOS)](https://www.w3.org/2004/02/skos/) is a W3C standard for representing controlled vocabularies, thesauri, and classification schemes in RDF. For soil science, it lets us say:
+
+> `skos:exactMatch` between `FAO:SandyLoam` and `USDA:SandyLoam`
+
+or:
+
+> `skos:broadMatch` from `ISO:Subsoil` to `USDA:BHorizon`
+
+By publishing soil vocabularies as SKOS concept schemes, we create a **shared semantic layer** that independent datasets can align against. A query for all measurements of "clay content in the topsoil" can then return results from multiple datasets that each used different internal terminology.
+
+## A SPARQL Query Example
+
+Here is a SPARQL query that retrieves all soil organic carbon measurements from our knowledge graph, along with their source dataset and sampling depth:
+
+```sparql
+PREFIX soil: <https://w3id.org/soil-health#>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?site ?depth ?value ?unit ?dataset
+WHERE {
+  ?obs a soil:SoilObservation ;
+       soil:observedProperty ?prop ;
+       soil:hasResult ?result ;
+       soil:samplingDepth ?depth ;
+       soil:fromDataset ?dataset ;
+       soil:atSite ?site .
+
+  ?result qudt:numericValue ?value ;
+          qudt:unit ?unit .
+
+  # Find observations for SOC regardless of local term used
+  ?prop skos:exactMatch soil:OrganicCarbon .
+}
+ORDER BY ?site ?depth
+```
+
+The key line is `skos:exactMatch soil:OrganicCarbon` — this resolves multiple local terms (`SOC`, `OC`, `Corg`) to a single canonical concept, returning a unified result across heterogeneous source datasets.
+
+## From Vocabulary Alignment to Intelligent Retrieval
+
+Once soil vocabularies are aligned in SKOS and datasets are represented as RDF, we unlock several capabilities:
+
+1. **Federated SPARQL queries** across multiple soil databases without data migration
+2. **Reasoning-based inference** — if `clay > 35%` and `structure = blocky`, infer `USDA texture class = clay`
+3. **RAG-augmented question answering** — the SoilBot system uses the knowledge graph as a retrieval backend to answer natural language questions with structured evidence
+
+The [Soil Vocabulary Browser](https://vocab.wangbeichen.com) is a live Skosmos instance that hosts the concept schemes we have developed. It provides a human-readable interface for exploring the vocabulary hierarchy, browsing concept definitions, and checking alignment mappings.
+
+## What Is Next
+
+The next step is **ontology-driven data validation**: using OWL class restrictions to automatically detect when incoming soil measurements violate domain constraints (e.g., pH values outside the possible range, negative organic carbon, horizon depths that overlap). This creates a feedback loop where the knowledge graph not only enables querying but actively improves data quality.
+
+If you are working on soil data interoperability and want to collaborate or discuss methodology, feel free to reach out.
