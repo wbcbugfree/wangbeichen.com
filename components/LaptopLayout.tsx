@@ -2,10 +2,12 @@
 
 import React, { useState, useCallback, useRef } from "react";
 import type { SiteData } from "@/data/types";
+import type { ExpandedSection } from "@/app/ClientPage";
 import {
   HeroSection,
   SkillsSection,
   WorkSection,
+  PublicationsSection,
   AboutSection,
   ContactSection,
   getClipFrom,
@@ -15,8 +17,8 @@ import ExpandedOverlay from "./sections/ui/ExpandedOverlay";
 
 type ResizableLayoutProps = {
   siteData: SiteData;
-  expandedSection: "work" | "about" | null;
-  setExpandedSection: (section: "work" | "about" | null) => void;
+  expandedSection: ExpandedSection;
+  setExpandedSection: (section: ExpandedSection) => void;
 };
 
 export default function ResizableLayout({
@@ -29,6 +31,7 @@ export default function ResizableLayout({
 
   // Refs for panel containers (used to capture bounding rect for expansion)
   const workPanelRef = useRef<HTMLDivElement>(null);
+  const publicationsPanelRef = useRef<HTMLDivElement>(null);
   const aboutPanelRef = useRef<HTMLDivElement>(null);
 
   const handleWorkExpand = useCallback(() => {
@@ -39,7 +42,17 @@ export default function ResizableLayout({
       if (rect) setSourceRect(rect);
       setExpandedSection("work");
     }
-  }, [expandedSection]);
+  }, [expandedSection, setExpandedSection]);
+
+  const handlePublicationsExpand = useCallback(() => {
+    if (expandedSection === "publications") {
+      setExpandedSection(null);
+    } else {
+      const rect = publicationsPanelRef.current?.getBoundingClientRect();
+      if (rect) setSourceRect(rect);
+      setExpandedSection("publications");
+    }
+  }, [expandedSection, setExpandedSection]);
 
   const handleAboutExpand = useCallback(() => {
     if (expandedSection === "about") {
@@ -49,7 +62,7 @@ export default function ResizableLayout({
       if (rect) setSourceRect(rect);
       setExpandedSection("about");
     }
-  }, [expandedSection]);
+  }, [expandedSection, setExpandedSection]);
 
   const clipFrom = getClipFrom(sourceRect);
 
@@ -61,12 +74,14 @@ export default function ResizableLayout({
   const mainHLineRef = useRef<HTMLDivElement>(null);
   const topVLineRef = useRef<HTMLDivElement>(null);
   const bottomVLineRef = useRef<HTMLDivElement>(null);
+  const bottomVCenterLineRef = useRef<HTMLDivElement>(null);
   const bottomRightHLineRef = useRef<HTMLDivElement>(null);
 
   // Animation refs for content
   const heroContentRef = useRef<HTMLDivElement>(null);
   const skillsContentRef = useRef<HTMLDivElement>(null);
   const workContentRef = useRef<HTMLDivElement>(null);
+  const publicationsContentRef = useRef<HTMLDivElement>(null);
   const aboutContentRef = useRef<HTMLDivElement>(null);
   const contactContentRef = useRef<HTMLDivElement>(null);
 
@@ -76,25 +91,31 @@ export default function ResizableLayout({
       mainHLine: mainHLineRef,
       topVLine: topVLineRef,
       bottomVLine: bottomVLineRef,
+      bottomVCenterLine: bottomVCenterLineRef,
       bottomRightHLine: bottomRightHLineRef,
     },
     content: {
       hero: heroContentRef,
       skills: skillsContentRef,
       work: workContentRef,
+      publications: publicationsContentRef,
       about: aboutContentRef,
       contact: contactContentRef,
     },
   });
 
   const bottomHeight = 100 - sizes.topHeight;
+  // Publications panel width = space between left divider and center divider
+  const publicationsWidth = sizes.bottomMiddleWidth - sizes.bottomLeftWidth;
+  // Right column width = remaining space
+  const rightColumnWidth = 100 - sizes.bottomMiddleWidth;
 
   return (
     <div
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-[calc(100vh-48px)] w-full overflow-hidden"
     >
-      {/* ===== TOP SECTION (Hero | Skills) ===== */}
+      {/* ===== TOP SECTION (Hero | Research Interests) ===== */}
       <div
         className="absolute left-0 right-0 top-0 flex"
         style={{ height: `${sizes.topHeight}%` }}
@@ -124,7 +145,7 @@ export default function ResizableLayout({
           />
         </div>
 
-        {/* Skills Section */}
+        {/* Research Interests (Skills) Section */}
         <div
           className="relative h-full overflow-auto"
           style={{ width: `${100 - sizes.topLeftWidth}%` }}
@@ -151,12 +172,12 @@ export default function ResizableLayout({
         />
       </div>
 
-      {/* ===== BOTTOM SECTION (Work | About + Contact) ===== */}
+      {/* ===== BOTTOM SECTION (Projects | Publications | About + Contact) ===== */}
       <div
         className="absolute bottom-0 left-0 right-0 flex"
         style={{ height: `${bottomHeight}%` }}
       >
-        {/* Work Section (Left) */}
+        {/* Projects & Demos Section (Left) */}
         <div
           ref={workPanelRef}
           className="relative h-full overflow-auto"
@@ -170,7 +191,7 @@ export default function ResizableLayout({
           </div>
         </div>
 
-        {/* Vertical Divider (Bottom Section) */}
+        {/* Vertical Divider (Projects | Publications) */}
         <div
           className="group relative z-10 flex h-full w-0 cursor-col-resize items-center justify-center"
           onMouseDown={handleMouseDown("vertical-bottom")}
@@ -185,10 +206,39 @@ export default function ResizableLayout({
           />
         </div>
 
+        {/* Publications Section (Center) */}
+        <div
+          ref={publicationsPanelRef}
+          className="relative h-full overflow-auto"
+          style={{ width: `${publicationsWidth}%` }}
+        >
+          <div ref={publicationsContentRef} className="h-full p-4">
+            <PublicationsSection
+              data={siteData.publications}
+              onExpand={handlePublicationsExpand}
+            />
+          </div>
+        </div>
+
+        {/* Vertical Divider (Publications | About+Contact) */}
+        <div
+          className="group relative z-10 flex h-full w-0 cursor-col-resize items-center justify-center"
+          onMouseDown={handleMouseDown("vertical-bottom-center")}
+        >
+          <div
+            ref={bottomVCenterLineRef}
+            className={`absolute h-full w-px origin-top bg-black ${
+              isDragging === "vertical-bottom-center"
+                ? "w-1 bg-gray-400"
+                : "group-hover:w-1 group-hover:bg-gray-400"
+            }`}
+          />
+        </div>
+
         {/* Right Section (About + Contact) */}
         <div
           className="relative h-full"
-          style={{ width: `${100 - sizes.bottomLeftWidth}%` }}
+          style={{ width: `${rightColumnWidth}%` }}
         >
           {/* About Section */}
           <div
@@ -247,9 +297,22 @@ export default function ResizableLayout({
       </ExpandedOverlay>
 
       <ExpandedOverlay
+        isOpen={expandedSection === "publications"}
+        clipFrom={clipFrom}
+        padding="p-0"
+        uniqueKey="publications-expanded"
+      >
+        <PublicationsSection
+          data={siteData.publications}
+          onExpand={handlePublicationsExpand}
+          isExpanded={true}
+        />
+      </ExpandedOverlay>
+
+      <ExpandedOverlay
         isOpen={expandedSection === "about"}
         clipFrom={clipFrom}
-        padding="p-8"
+        padding="p-0"
         uniqueKey="about-expanded"
       >
         <AboutSection

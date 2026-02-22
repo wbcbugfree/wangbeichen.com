@@ -6,6 +6,8 @@ export type PanelSizes = {
   topHeight: number;
   topLeftWidth: number;
   bottomLeftWidth: number;
+  /** Right edge of the Publications column (Projects + Publications combined %) */
+  bottomMiddleWidth: number;
   bottomRightTopHeight: number;
 };
 
@@ -13,6 +15,7 @@ type DividerType =
   | "horizontal-main"
   | "vertical-top"
   | "vertical-bottom"
+  | "vertical-bottom-center"
   | "horizontal-bottom-right"
   | null;
 
@@ -21,6 +24,12 @@ const CONSTRAINTS = {
   maxTopHeight: 40,
   minLeftWidth: 30,
   maxLeftWidth: 70,
+  // Projects column: min/max for the left vertical divider
+  minBottomLeftWidth: 15,
+  maxBottomLeftWidth: 45,
+  // Publications right edge: left divider + at least 15% for pubs, max 80%
+  minBottomMiddleWidth: 30,
+  maxBottomMiddleWidth: 80,
   minAboutHeight: 30,
   maxAboutHeight: 70,
 };
@@ -30,7 +39,8 @@ const LERP_FACTOR = 0.15;
 const DEFAULT_SIZES: PanelSizes = {
   topHeight: 25,
   topLeftWidth: 55,
-  bottomLeftWidth: 40,
+  bottomLeftWidth: 30,      // Projects: 30%
+  bottomMiddleWidth: 65,    // Projects (30%) + Publications (35%) = 65%
   bottomRightTopHeight: 60,
 };
 
@@ -68,10 +78,21 @@ export function useResizablePanels(
           Math.max(CONSTRAINTS.minLeftWidth, newLeftWidth),
         );
       } else if (isDragging === "vertical-bottom") {
+        // Projects left divider — cannot exceed Publications right edge minus 15%
         const newLeftWidth = ((e.clientX - rect.left) / rect.width) * 100;
         targetSizes.current.bottomLeftWidth = Math.min(
-          CONSTRAINTS.maxLeftWidth,
-          Math.max(CONSTRAINTS.minLeftWidth, newLeftWidth),
+          targetSizes.current.bottomMiddleWidth - 15,
+          Math.max(CONSTRAINTS.minBottomLeftWidth, newLeftWidth),
+        );
+      } else if (isDragging === "vertical-bottom-center") {
+        // Publications right divider — cannot go below Projects divider + 15%
+        const newMiddleWidth = ((e.clientX - rect.left) / rect.width) * 100;
+        targetSizes.current.bottomMiddleWidth = Math.min(
+          CONSTRAINTS.maxBottomMiddleWidth,
+          Math.max(
+            targetSizes.current.bottomLeftWidth + 15,
+            newMiddleWidth,
+          ),
         );
       } else if (isDragging === "horizontal-bottom-right") {
         const topOffset = (targetSizes.current.topHeight / 100) * rect.height;
@@ -119,6 +140,11 @@ export function useResizablePanels(
           bottomLeftWidth: lerp(
             prev.bottomLeftWidth,
             targetSizes.current.bottomLeftWidth,
+            LERP_FACTOR,
+          ),
+          bottomMiddleWidth: lerp(
+            prev.bottomMiddleWidth,
+            targetSizes.current.bottomMiddleWidth,
             LERP_FACTOR,
           ),
           bottomRightTopHeight: lerp(

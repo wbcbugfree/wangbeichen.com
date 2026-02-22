@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -48,6 +49,7 @@
 }
 
 :root {
+  --site-accent: oklch(0.55 0.14 150); /* soil science green */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -164,5 +166,11 @@
 
   .highlighted-primary {
     @apply text-primary font-semibold;
+  }
+
+  /* FallingText highlighted word style (Research Interests section) */
+  .highlighted {
+    color: var(--site-accent);
+    font-weight: 700;
   }
 }

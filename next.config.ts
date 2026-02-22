@@ -1,13 +1,15 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  output: "export",
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
-    ],
+    unoptimized: true,
+  },
+  turbopack: {
+    // Explicitly set root to prevent Turbopack from picking up the parent
+    // directory when this project lives inside a git worktree
+    root: path.resolve(__dirname),
   },
 };
 
