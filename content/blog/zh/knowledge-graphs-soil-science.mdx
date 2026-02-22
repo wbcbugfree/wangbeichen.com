@@ -1,0 +1,72 @@
+---
+title: "土壤科学中的知识图谱：构建土壤数据互操作性的语义层"
+date: "2025-11-15"
+description: "基于SKOS的本体和知识图谱如何解决土壤科学数据碎片化问题，实现跨异构土壤数据集的语义查询。"
+tags: ["knowledge-graphs", "soil-science", "SKOS", "ontology", "semantic-web"]
+lang: "zh"
+---
+
+土壤科学面临一个根本性的数据问题：数以千计的研究团队、政府机构和监测项目都在生产土壤数据——但每个机构都使用各自的词汇体系、分类系统和数据格式。一个数据集中的"砂质壤土"可能无法与另一个数据集中的"砂质壤土"准确对应。链接这些数据集需要语义互操作性，而这正是知识图谱所能提供的。
+
+## 碎片化问题
+
+设想两个国家土壤调查项目都测量了"有机碳"。其中一个以 `g/kg` 为单位报告，另一个则用 `%`。一个将其称为 `SOC`，另一个称为 `OC`。两者还引用了不同的深度剖面。整合这些数据不仅需要解决单位换算问题，还需要进行**概念对齐**——调查项目A中的"表土"是否对应调查项目B中的"0–30厘米层位"？
+
+这不是一个数据工程问题，而是一个**知识表示问题**。
+
+## SKOS：土壤词汇的标准
+
+[简单知识组织系统（SKOS）](https://www.w3.org/2004/02/skos/)是W3C发布的标准，用于以RDF格式表示受控词汇、叙词表和分类方案。对于土壤科学，它允许我们表达：
+
+> `skos:exactMatch`（精确匹配）关系：`FAO:SandyLoam` 与 `USDA:SandyLoam`
+
+或：
+
+> `skos:broadMatch`（宽泛匹配）关系：从 `ISO:Subsoil` 到 `USDA:BHorizon`
+
+通过以SKOS概念方案的形式发布土壤词汇，我们构建了一个**共享语义层**，各独立数据集都可以与之对齐。此后，对"表土中黏粒含量"所有测量值的查询，便可从多个内部术语各异的数据集中返回统一结果。
+
+## SPARQL查询示例
+
+以下SPARQL查询从我们的知识图谱中检索所有土壤有机碳测量值，并附带来源数据集和采样深度信息：
+
+```sparql
+PREFIX soil: <https://w3id.org/soil-health#>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?site ?depth ?value ?unit ?dataset
+WHERE {
+  ?obs a soil:SoilObservation ;
+       soil:observedProperty ?prop ;
+       soil:hasResult ?result ;
+       soil:samplingDepth ?depth ;
+       soil:fromDataset ?dataset ;
+       soil:atSite ?site .
+
+  ?result qudt:numericValue ?value ;
+          qudt:unit ?unit .
+
+  # 无论使用何种本地术语，均查找SOC观测值
+  ?prop skos:exactMatch soil:OrganicCarbon .
+}
+ORDER BY ?site ?depth
+```
+
+关键语句是 `skos:exactMatch soil:OrganicCarbon`——它将多个本地术语（`SOC`、`OC`、`Corg`）统一解析为单一规范概念，从而跨异构源数据集返回统一结果。
+
+## 从词汇对齐到智能检索
+
+一旦土壤词汇在SKOS中完成对齐，并以RDF格式表示数据集，便可解锁以下多种能力：
+
+1. **联邦SPARQL查询**——无需数据迁移，即可跨多个土壤数据库查询
+2. **基于推理的推断**——若 `clay > 35%` 且 `structure = blocky`，则推断 `USDA质地等级 = 黏土`
+3. **RAG增强的问答**——SoilBot系统将知识图谱作为检索后端，通过结构化证据回答自然语言问题
+
+[土壤词汇浏览器](https://vocab.wangbeichen.com)是一个在线运行的Skosmos实例，托管了我们开发的概念方案。它提供人性化的界面，供用户浏览词汇层次结构、查看概念定义，以及检查对齐映射关系。
+
+## 下一步计划
+
+下一步是**本体驱动的数据验证**：利用OWL类约束自动检测入库土壤测量数据何时违反领域约束（例如：pH值超出可能范围、有机碳为负值、层位深度相互重叠）。这将形成一个反馈闭环——知识图谱不仅能够支持查询，还能主动提升数据质量。
+
+如果您正在研究土壤数据互操作性，欢迎联系我进行合作或方法论探讨。
