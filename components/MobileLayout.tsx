@@ -88,7 +88,7 @@ export default function MobileLayout({
         {/* Projects & Demos Section */}
         <div
           ref={workRef}
-          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black dark:border-white/10 bg-white dark:bg-[--background] px-6 transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-white/5"
+          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black dark:border-white/10 bg-background px-6 transition-colors duration-200 hover:bg-muted"
         >
           <SectionHeading_Clickable onClick={handleWorkExpand}>
             Projects &amp; Demos
@@ -101,7 +101,7 @@ export default function MobileLayout({
         {/* Publications Section */}
         <div
           ref={publicationsRef}
-          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black dark:border-white/10 bg-white dark:bg-[--background] px-6 transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-white/5"
+          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black dark:border-white/10 bg-background px-6 transition-colors duration-200 hover:bg-muted"
         >
           <SectionHeading_Clickable onClick={handlePublicationsExpand}>
             Publications
@@ -114,7 +114,7 @@ export default function MobileLayout({
         {/* About Section */}
         <div
           ref={aboutRef}
-          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black dark:border-white/10 bg-white dark:bg-[--background] px-6 transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-white/5"
+          className="flex cursor-pointer items-center justify-between overflow-hidden border-b border-black dark:border-white/10 bg-background px-6 transition-colors duration-200 hover:bg-muted"
         >
           <SectionHeading_Clickable onClick={handleAboutExpand}>
             About Me
@@ -125,7 +125,7 @@ export default function MobileLayout({
         </div>
 
         {/* Contact Section */}
-        <div className="overflow-hidden bg-white dark:bg-[--background] px-6 py-6">
+        <div className="overflow-hidden bg-background px-6 py-6">
           <ContactSection data={siteData.contact} />
         </div>
       </div>

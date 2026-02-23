@@ -23,7 +23,7 @@ export default function ExpandedOverlay({
       {isOpen && (
         <motion.div
           key={uniqueKey}
-          className="fixed inset-0 z-50 bg-white dark:bg-[--background]"
+          className="fixed inset-0 z-50 bg-background"
           initial={{ clipPath: clipFrom }}
           animate={{ clipPath: "inset(0px 0px 0px 0px)" }}
           exit={{ clipPath: clipFrom }}

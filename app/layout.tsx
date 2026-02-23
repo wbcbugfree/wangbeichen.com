@@ -47,6 +47,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Computed at build time (static export — new Date() is the build timestamp)
+  const lastUpdated = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <html lang="en">
       <body
@@ -55,7 +62,7 @@ export default function RootLayout({
         <NavBar />
         {/* pt-12 accounts for the fixed 48px (h-12) navbar */}
         <div className="pt-12">{children}</div>
-        <Footer />
+        <Footer lastUpdated={lastUpdated} />
       </body>
     </html>
   );

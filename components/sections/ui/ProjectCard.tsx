@@ -21,7 +21,7 @@ export function ProjectCard({
   return (
     <CardWrapper
       {...cardProps}
-      className="relative group block overflow-hidden rounded-2xl bg-[#fdfdfd] dark:bg-[--card] transition-shadow hover:shadow-lg"
+      className="relative group block overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg"
     >
       {/* Image Area */}
       <div className="relative aspect-2/1 w-full overflow-hidden">

@@ -89,7 +89,7 @@ function CollapsedPubCard({ pub }: { pub: Publication }) {
   return (
     <CardWrapper
       {...cardProps}
-      className="relative group block overflow-hidden rounded-2xl bg-[#fdfdfd] dark:bg-[--card] transition-shadow hover:shadow-lg text-left w-full"
+      className="relative group block overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg text-left w-full"
     >
       {/* Image */}
       <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -104,7 +104,7 @@ function CollapsedPubCard({ pub }: { pub: Publication }) {
 
       {/* Footer overlay — title + year/type */}
       <div className="absolute bottom-0 w-full flex items-end justify-between px-3 py-1.5 bg-white/85 dark:bg-black/70 backdrop-blur-sm">
-        <h4 className="heading-card text-black line-clamp-1 flex-1 min-w-0 pr-2">
+        <h4 className="heading-card text-foreground line-clamp-1 flex-1 min-w-0 pr-2">
           {pub.title}
         </h4>
         <span className="text-meta shrink-0 text-[10px]">
@@ -137,7 +137,7 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
       {/* Image card — identical to ProjectCard */}
       <CardWrapper
         {...cardProps}
-        className="relative group block overflow-hidden rounded-2xl bg-[#fdfdfd] dark:bg-[--card] transition-shadow hover:shadow-lg"
+        className="relative group block overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg"
       >
         <div className="relative aspect-2/1 w-full overflow-hidden">
           <Image
@@ -150,7 +150,7 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
         </div>
         {/* Footer overlay */}
         <div className="absolute bottom-0 w-full flex items-center justify-between px-4 py-1 bg-white/80 dark:bg-black/70">
-          <h4 className="heading-card text-black line-clamp-1 flex-1 min-w-0 pr-2">
+          <h4 className="heading-card text-foreground line-clamp-1 flex-1 min-w-0 pr-2">
             {pub.title}
           </h4>
           <div className="flex items-center gap-2 shrink-0">

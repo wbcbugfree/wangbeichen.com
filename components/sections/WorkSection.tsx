@@ -60,7 +60,7 @@ export function WorkSection({
                           href={project.paperUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-full border border-black px-3 py-1 text-xs font-medium hover:bg-black hover:text-white transition-colors"
+                          className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
                         >
                           PDF Paper
                         </a>
@@ -70,7 +70,7 @@ export function WorkSection({
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-full border border-black px-3 py-1 text-xs font-medium hover:bg-black hover:text-white transition-colors"
+                          className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
                         >
                           GitHub
                         </a>
