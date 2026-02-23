@@ -6,7 +6,7 @@ export function CloseButton({ onClick }: CloseButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="absolute right-0 top-0 rounded-full p-2 transition-all duration-300 hover:bg-black hover:text-white"
+      className="absolute right-0 top-0 rounded-full p-2 transition-all duration-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
       aria-label="Close"
     >
       <svg

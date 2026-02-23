@@ -94,7 +94,7 @@ export default async function ZhBlogPost({
           options={{
             mdxOptions: {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              rehypePlugins: [[rehypePrettyCode as any, { theme: "github-light", keepBackground: true }]],
+              rehypePlugins: [[rehypePrettyCode as any, { theme: { light: "github-light", dark: "github-dark" }, keepBackground: false }]],
             },
           }}
         />
