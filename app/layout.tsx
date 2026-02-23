@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -34,6 +35,11 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://wangbeichen.com",
   },
+  alternates: {
+    types: {
+      "application/rss+xml": "https://wangbeichen.com/feed.xml",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -49,6 +55,7 @@ export default function RootLayout({
         <NavBar />
         {/* pt-12 accounts for the fixed 48px (h-12) navbar */}
         <div className="pt-12">{children}</div>
+        <Footer />
       </body>
     </html>
   );

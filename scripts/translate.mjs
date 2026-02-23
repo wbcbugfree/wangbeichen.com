@@ -6,7 +6,20 @@
  *   node scripts/translate.mjs          # translate only missing files
  *   node scripts/translate.mjs --force  # re-translate all files
  *
- * Requires:  ANTHROPIC_API_KEY env var
+ * Environment variables:
+ *   OPENAI_API_KEY     API key (required)
+ *   OPENAI_BASE_URL    API base URL (default: https://api.openai.com/v1)
+ *   TRANSLATE_MODEL    Model name (default: gpt-4o)
+ *
+ * Examples:
+ *   # OpenAI
+ *   OPENAI_API_KEY=sk-xxx node scripts/translate.mjs
+ *
+ *   # DeepSeek
+ *   OPENAI_BASE_URL=https://api.deepseek.com/v1 OPENAI_API_KEY=sk-xxx TRANSLATE_MODEL=deepseek-chat node scripts/translate.mjs
+ *
+ *   # Local Ollama
+ *   OPENAI_BASE_URL=http://localhost:11434/v1 OPENAI_API_KEY=unused TRANSLATE_MODEL=qwen2.5 node scripts/translate.mjs
  *
  * Convention:
  *   content/blog/*.mdx          ← English source posts  (lang: en)
@@ -20,7 +33,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -28,7 +41,12 @@ const EN_DIR = path.join(ROOT, "content", "blog");
 const ZH_DIR = path.join(ROOT, "content", "blog", "zh");
 const FORCE = process.argv.includes("--force");
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const MODEL = process.env.TRANSLATE_MODEL ?? "gpt-4o";
+
+const client = new OpenAI({
+  baseURL: process.env.OPENAI_BASE_URL ?? "https://api.openai.com/v1",
+  apiKey: process.env.OPENAI_API_KEY ?? "unused",
+});
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -75,14 +93,16 @@ Rules:
 - Translate only natural language prose, headings text, and list item text
 - Output ONLY the translated content, no explanations`;
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-4-6",
+  const response = await client.chat.completions.create({
+    model: MODEL,
     max_tokens: 8192,
-    system: systemPrompt,
-    messages: [{ role: "user", content: text }],
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: text },
+    ],
   });
 
-  return response.content[0].text.trim();
+  return response.choices[0].message.content.trim();
 }
 
 async function translateFile(srcPath, destPath, fromLang, toLang) {
@@ -133,12 +153,13 @@ async function translateFile(srcPath, destPath, fromLang, toLang) {
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error("❌  ANTHROPIC_API_KEY is not set.");
+  if (!process.env.OPENAI_API_KEY) {
+    console.error("❌  OPENAI_API_KEY is not set.");
     process.exit(1);
   }
 
   console.log("🌐  Blog Translation Script");
+  console.log(`    Model: ${MODEL}`);
   console.log(`    Mode: ${FORCE ? "force (re-translate all)" : "incremental (skip existing)"}\n`);
 
   fs.mkdirSync(ZH_DIR, { recursive: true });

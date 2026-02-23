@@ -137,7 +137,7 @@ export default function ResizableLayout({
         >
           <div
             ref={topVLineRef}
-            className={`absolute h-full w-px origin-top bg-black ${
+            className={`absolute h-full w-px origin-top bg-black dark:bg-white/20 ${
               isDragging === "vertical-top"
                 ? "w-1 bg-gray-400"
                 : "group-hover:w-1 group-hover:bg-gray-400"
@@ -164,7 +164,7 @@ export default function ResizableLayout({
       >
         <div
           ref={mainHLineRef}
-          className={`absolute h-px w-full origin-left bg-black ${
+          className={`absolute h-px w-full origin-left bg-black dark:bg-white/20 ${
             isDragging === "horizontal-main"
               ? "h-1 bg-gray-400"
               : "group-hover:h-1 group-hover:bg-gray-400"
@@ -198,7 +198,7 @@ export default function ResizableLayout({
         >
           <div
             ref={bottomVLineRef}
-            className={`absolute h-full w-px origin-top bg-black ${
+            className={`absolute h-full w-px origin-top bg-black dark:bg-white/20 ${
               isDragging === "vertical-bottom"
                 ? "w-1 bg-gray-400"
                 : "group-hover:w-1 group-hover:bg-gray-400"
@@ -227,7 +227,7 @@ export default function ResizableLayout({
         >
           <div
             ref={bottomVCenterLineRef}
-            className={`absolute h-full w-px origin-top bg-black ${
+            className={`absolute h-full w-px origin-top bg-black dark:bg-white/20 ${
               isDragging === "vertical-bottom-center"
                 ? "w-1 bg-gray-400"
                 : "group-hover:w-1 group-hover:bg-gray-400"
@@ -262,7 +262,7 @@ export default function ResizableLayout({
           >
             <div
               ref={bottomRightHLineRef}
-              className={`absolute h-px w-full origin-left bg-black ${
+              className={`absolute h-px w-full origin-left bg-black dark:bg-white/20 ${
                 isDragging === "horizontal-bottom-right"
                   ? "h-1 bg-gray-400"
                   : "group-hover:h-1 group-hover:bg-gray-400"
