@@ -44,7 +44,7 @@ export default async function BlogPost({
       <nav className="mb-10">
         <Link
           href="/blog"
-          className="text-meta text-sm hover:text-black transition-colors"
+          className="text-meta text-sm hover:text-black dark:hover:text-white transition-colors"
         >
           ← All posts
         </Link>

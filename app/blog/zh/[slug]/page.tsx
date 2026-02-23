@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPostBySlug(slug, "zh");
   return {
-    title: `${post.title} | 王贝辰`,
+    title: `${post.title} | 王北辰`,
     description: post.description,
     openGraph: {
       title: post.title,
@@ -43,7 +43,7 @@ export default async function ZhBlogPost({
       <nav className="mb-10">
         <Link
           href="/blog/zh"
-          className="text-meta text-sm hover:text-black transition-colors"
+          className="text-meta text-sm hover:text-black dark:hover:text-white transition-colors"
         >
           ← 所有文章
         </Link>

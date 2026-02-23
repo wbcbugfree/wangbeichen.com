@@ -4,10 +4,10 @@ import Image from "next/image";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "博客 | 王贝辰",
+  title: "博客 | 王北辰",
   description: "关于土壤科学、知识图谱和语义网络技术的研究笔记与文章。",
   openGraph: {
-    title: "博客 | 王贝辰",
+    title: "博客 | 王北辰",
     description: "关于土壤科学和知识工程的研究笔记。",
     type: "website",
   },
