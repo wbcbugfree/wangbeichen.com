@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -27,10 +28,21 @@ export default function ZhBlogIndex() {
       {posts.length === 0 ? (
         <p className="text-meta">暂无文章，请稍后回来查看。</p>
       ) : (
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-200 dark:divide-white/10">
           {posts.map((post) => (
             <article key={post.slug} className="py-8 first:pt-0">
               <Link href={`/blog/zh/${post.slug}`} className="group block">
+                {post.coverImage && (
+                  <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-3">
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 672px"
+                    />
+                  </div>
+                )}
                 <time className="text-meta text-xs">{formatDate(post.date)}</time>
                 <h2 className="heading-panel mt-1 group-hover:underline">
                   {post.title}
@@ -45,7 +57,7 @@ export default function ZhBlogIndex() {
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-gray-300 px-2 py-0.5 text-xs text-gray-500"
+                        className="rounded-full border border-gray-300 dark:border-white/20 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400"
                       >
                         {tag}
                       </span>

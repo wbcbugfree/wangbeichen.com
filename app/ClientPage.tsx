@@ -11,7 +11,7 @@ export default function ClientPage({ siteData }: { siteData: SiteData }) {
   const [expandedSection, setExpandedSection] = useState<ExpandedSection>(null);
 
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen text-foreground">
       {/* Mobile Layout */}
       <div className="block md:hidden">
         <MobileLayout

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://wangbeichen.com/</id>
+    <title>Beichen Wang — Blog</title>
+    <updated>2026-02-22T22:59:01.641Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>Beichen Wang</name>
+        <email>beichen.wang@example.com</email>
+        <uri>https://wangbeichen.com</uri>
+    </author>
+    <link rel="alternate" href="https://wangbeichen.com/blog"/>
+    <subtitle>Research blog by Beichen Wang</subtitle>
+    <logo>https://wangbeichen.com/pic.png</logo>
+    <icon>https://wangbeichen.com/favicon.ico</icon>
+    <rights>© 2026 Beichen Wang</rights>
+    <entry>
+        <title type="html"><![CDATA[Knowledge Graphs for Soil Science: Building a Semantic Layer for Soil Data Interoperability]]></title>
+        <id>https://wangbeichen.com/blog/knowledge-graphs-soil-science</id>
+        <link href="https://wangbeichen.com/blog/knowledge-graphs-soil-science"/>
+        <updated>2025-11-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[How SKOS-based ontologies and knowledge graphs can solve the fragmentation problem in soil science data, enabling semantic queries across heterogeneous soil datasets.]]></summary>
+    </entry>
+</feed>

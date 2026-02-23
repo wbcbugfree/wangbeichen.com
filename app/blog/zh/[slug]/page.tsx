@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -62,7 +63,7 @@ export default async function ZhBlogPost({
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-gray-300 px-2 py-0.5 text-xs text-gray-500"
+                className="rounded-full border border-gray-300 dark:border-white/20 px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400"
               >
                 {tag}
               </span>
@@ -71,10 +72,23 @@ export default async function ZhBlogPost({
         )}
       </header>
 
-      <hr className="mb-10 border-black" />
+      {post.coverImage && (
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl mb-10">
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 672px"
+            priority
+          />
+        </div>
+      )}
+
+      <hr className="mb-10 border-black dark:border-white/10" />
 
       {/* MDX content */}
-      <article className="prose prose-neutral max-w-none prose-headings:font-bold prose-h2:text-xl prose-h3:text-lg prose-code:text-sm prose-pre:bg-gray-50 prose-pre:border prose-pre:border-gray-200 prose-a:text-black prose-a:underline hover:prose-a:opacity-70">
+      <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-h2:text-xl prose-h3:text-lg prose-code:text-sm prose-pre:bg-gray-50 dark:prose-pre:bg-white/5 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-white/10 prose-a:text-black dark:prose-a:text-white prose-a:underline hover:prose-a:opacity-70">
         <MDXRemote
           source={post.content}
           options={{
@@ -87,10 +101,10 @@ export default async function ZhBlogPost({
       </article>
 
       {/* Footer navigation */}
-      <footer className="mt-16 border-t border-gray-200 pt-8">
+      <footer className="mt-16 border-t border-gray-200 dark:border-white/10 pt-8">
         <Link
           href="/blog/zh"
-          className="text-meta text-sm hover:text-black transition-colors"
+          className="text-meta text-sm hover:text-black dark:hover:text-white transition-colors"
         >
           ← 返回所有文章
         </Link>

@@ -33,7 +33,7 @@ export function AboutSection({
             <SectionHeading_Clickable onClick={onExpand}>
               {`About Me`}
             </SectionHeading_Clickable>
-            <p className="text-body leading-relaxed text-black mt-3">
+            <p className="text-body leading-relaxed text-foreground mt-3">
               {data.text}
             </p>
           </div>
@@ -45,10 +45,10 @@ export function AboutSection({
                 <h4 className="heading-card mb-4 font-semibold uppercase tracking-widest text-xs">
                   Education
                 </h4>
-                <div className="space-y-4 border-l-2 border-black pl-5">
+                <div className="space-y-4 border-l-2 border-foreground/20 pl-5">
                   {data.education.map((entry, i) => (
                     <div key={i} className="relative">
-                      <span className="absolute -left-[1.45rem] top-[0.35rem] h-2.5 w-2.5 rounded-full bg-black" />
+                      <span className="absolute -left-[1.45rem] top-[0.35rem] h-2.5 w-2.5 rounded-full bg-foreground/60" />
                       <p className="text-meta text-xs">{entry.period}</p>
                       <p className="font-semibold text-sm mt-0.5">{entry.degree}</p>
                       <p className="text-meta text-xs">{entry.institution}</p>
@@ -66,10 +66,10 @@ export function AboutSection({
                 <h4 className="heading-card mb-4 font-semibold uppercase tracking-widest text-xs">
                   Experience
                 </h4>
-                <div className="space-y-4 border-l-2 border-black pl-5">
+                <div className="space-y-4 border-l-2 border-foreground/20 pl-5">
                   {data.experience.map((entry, i) => (
                     <div key={i} className="relative">
-                      <span className="absolute -left-[1.45rem] top-[0.35rem] h-2.5 w-2.5 rounded-full bg-black" />
+                      <span className="absolute -left-[1.45rem] top-[0.35rem] h-2.5 w-2.5 rounded-full bg-foreground/60" />
                       <p className="text-meta text-xs">{entry.period}</p>
                       <p className="font-semibold text-sm mt-0.5">{entry.role}</p>
                       <p className="text-meta text-xs">{entry.organization}</p>
@@ -104,7 +104,7 @@ export function AboutSection({
             className="h-full w-full object-contain"
           />
         </div>
-        <p className="flex-1 text-body text-black">{data.text}</p>
+        <p className="flex-1 text-body text-foreground">{data.text}</p>
       </div>
     </div>
   );
