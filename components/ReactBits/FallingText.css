@@ -18,10 +18,6 @@
   user-select: none;
 }
 
-.highlighted {
-  font-weight: bold;
-  color: brown;
-}
 
 .falling-text-canvas {
   position: absolute;

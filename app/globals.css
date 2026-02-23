@@ -174,3 +174,15 @@
     font-weight: 700;
   }
 }
+
+/* rehype-pretty-code v0.x dual theme: switch via --shiki-light / --shiki-dark vars */
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+.dark code[data-theme*=" "],
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}

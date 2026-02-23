@@ -68,7 +68,7 @@ export function ContactSection({ data }: ContactSectionProps) {
               title={`${entry.type}: ${entry.value}`}
               target={entry.href.startsWith("mailto:") ? undefined : "_blank"}
               rel={entry.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              className="flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 text-gray-500 hover:text-black hover:border-black transition-colors"
+              className="flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 dark:border-white/20 text-gray-500 dark:text-gray-400 hover:text-black hover:border-black dark:hover:text-white dark:hover:border-white transition-colors"
               aria-label={entry.type}
             >
               {Icon ? <Icon /> : <span className="text-xs font-semibold">{entry.type.slice(0, 2)}</span>}
