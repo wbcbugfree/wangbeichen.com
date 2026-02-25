@@ -36,6 +36,16 @@ export function AboutSection({
             <p className="text-body leading-relaxed text-foreground mt-3">
               {data.text}
             </p>
+            {data.cvUrl && (
+              <a
+                href={data.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-1 self-start rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+              >
+                View CV ↗
+              </a>
+            )}
           </div>
 
           {/* Right: Education + Experience timelines */}
@@ -104,7 +114,19 @@ export function AboutSection({
             className="h-full w-full object-contain"
           />
         </div>
-        <p className="flex-1 text-body text-foreground">{data.text}</p>
+        <div className="flex flex-col flex-1 gap-2">
+          <p className="text-body text-foreground">{data.text}</p>
+          {data.cvUrl && (
+            <a
+              href={data.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 self-start rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+            >
+              View CV ↗
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );

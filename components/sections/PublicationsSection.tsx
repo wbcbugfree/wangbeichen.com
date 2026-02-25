@@ -80,7 +80,7 @@ export function PublicationsSection({
 // ── Collapsed card (ProjectCard style) ────────────────────────────────────────
 
 function CollapsedPubCard({ pub }: { pub: Publication }) {
-  const href = pub.paperUrl ?? pub.codeUrl ?? pub.slidesUrl;
+  const href = pub.paperUrl ?? pub.codeUrl ?? pub.videoUrl ?? pub.slidesUrl;
   const CardWrapper = href ? "a" : "div";
   const cardProps = href
     ? { href, target: "_blank" as const, rel: "noopener noreferrer" }
@@ -212,6 +212,16 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
               className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
             >
               Code
+            </a>
+          )}
+          {pub.videoUrl && (
+            <a
+              href={pub.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+            >
+              Video
             </a>
           )}
           {pub.slidesUrl && (

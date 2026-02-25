@@ -28,6 +28,7 @@ export const aboutData: AboutData = {
   image: "/pic.png",
   imageAlt: "Beichen Wang",
   text: `I am a PhD researcher at [University Name] working at the intersection of soil science and artificial intelligence. My research focuses on building knowledge graphs and ontologies for soil science data, enabling semantic interoperability and intelligent retrieval across heterogeneous soil datasets. I am passionate about making soil knowledge more accessible, reusable, and machine-readable.`,
+  cvUrl: "/cv.pdf",  // Add your CV PDF path here (place file in /public/) or use a GitHub URL
   education: [
     {
       degree: "PhD in Soil Science / Knowledge Engineering",
@@ -138,6 +139,8 @@ export const publicationsData: Publication[] = [
     type: "conference",
     paperUrl: "https://doi.org/10.1145/placeholder",
     codeUrl: "https://github.com/beichenwang/soil-health-kg",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    slidesUrl: "/slides/kcap2025-slides.pdf",
     abstract:
       "We present a knowledge graph framework for integrating heterogeneous soil science datasets using SKOS, OWL, and SPARQL. Our approach enables semantic querying across soil health indicators, land-use classifications, and environmental measurements from multiple national soil monitoring programmes.",
     highlight: true,
@@ -151,6 +154,8 @@ export const publicationsData: Publication[] = [
     type: "conference",
     paperUrl: "https://doi.org/10.1007/placeholder",
     codeUrl: "https://github.com/beichenwang/soilbot",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    slidesUrl: "/slides/iswc2024-slides.pdf",
     abstract:
       "SoilBot is a retrieval-augmented generation system that uses the Soil Health Knowledge Graph as its knowledge base. It translates natural language queries into SPARQL and combines structured retrieval with large language model generation.",
   },
@@ -162,5 +167,7 @@ export const publicationsData: Publication[] = [
     year: 2024,
     type: "journal",
     paperUrl: "https://doi.org/10.3233/placeholder",
+    // videoUrl: "https://www.youtube.com/watch?v=...",
+    // slidesUrl: "/slides/appliedontology2024-slides.pdf",
   },
 ];

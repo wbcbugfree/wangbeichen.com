@@ -28,6 +28,7 @@ export type AboutData = {
   image: string;
   imageAlt: string;
   text: string;
+  cvUrl?: string;
   education?: EducationEntry[];
   experience?: ExperienceEntry[];
 };
@@ -63,6 +64,7 @@ export type Publication = {
   paperUrl?: string;
   codeUrl?: string;
   slidesUrl?: string;
+  videoUrl?: string;
   abstract?: string;
   highlight?: boolean;
   image?: string;
