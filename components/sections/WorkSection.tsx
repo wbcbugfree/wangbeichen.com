@@ -24,7 +24,6 @@ export function WorkSection({
       {isExpanded && <CloseButton onClick={onExpand} />}
       {data.map((group) => (
         <div key={group.category} className="mb-4">
-          <p className="mt-2 text-meta">{group.category}</p>
           <div
             className={`mt-4 ${isExpanded ? "grid grid-cols-2 gap-6" : "space-y-4"}`}
           >
@@ -32,7 +31,6 @@ export function WorkSection({
               <div key={project.title} className="flex flex-col gap-2">
                 <ProjectCard
                   title={project.title}
-                  image={project.image}
                   techStack={project.techStack}
                   href={project.href ?? project.demoUrl ?? project.githubUrl}
                 />

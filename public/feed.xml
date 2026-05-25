@@ -4,7 +4,7 @@
         <title>Beichen Wang — Blog</title>
         <link>https://wangbeichen.com/blog</link>
         <description>Research blog by Beichen Wang</description>
-        <lastBuildDate>Fri, 22 May 2026 12:20:11 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 25 May 2026 22:40:48 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -20,7 +20,6 @@
             <guid>https://wangbeichen.com/blog/knowledge-graphs-soil-science</guid>
             <pubDate>Sat, 15 Nov 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[How SKOS-based ontologies and knowledge graphs can solve the fragmentation problem in soil science data, enabling semantic queries across heterogeneous soil datasets.]]></description>
-            <enclosure url="https://wangbeichen.com/projects/placeholder.png" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>

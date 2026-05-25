@@ -105,8 +105,8 @@ export function AboutSection({
         </SectionHeading_Clickable>
       </div>
 
-      <div className="mt-3 flex items-start gap-3 sm:mt-4 sm:gap-4 xl:gap-6">
-        <div className="relative h-24 w-24 shrink-0 sm:h-32 sm:w-32 md:h-40 md:w-40 xl:h-56 xl:w-56">
+      <div className="mt-3 flex flex-col gap-3 sm:mt-4 xl:flex-row xl:items-start xl:gap-5">
+        <div className="relative h-24 w-24 shrink-0 self-center sm:h-28 sm:w-28 xl:h-32 xl:w-32">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={data.image}
@@ -115,7 +115,9 @@ export function AboutSection({
           />
         </div>
         <div className="flex flex-col flex-1 gap-2">
-          <p className="text-body text-foreground">{data.text}</p>
+          <p className="text-[13px] leading-5 text-foreground xl:text-sm xl:leading-6 2xl:text-base 2xl:leading-7">
+            {data.text}
+          </p>
           {data.cvUrl && (
             <a
               href={data.cvUrl}

@@ -15,23 +15,29 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Beichen Wang | Soil Scientist & Knowledge Engineer",
+  title: "Beichen Wang | PhD Candidate & Knowledge Graph Researcher",
   description:
-    "Academic homepage of Beichen Wang — PhD researcher working at the intersection of soil science, knowledge graphs, and semantic web technologies.",
+    "Academic homepage of Beichen Wang, a PhD candidate at Wageningen University & Research working on soil health knowledge graphs, LLMs, NLP, and semantic web technologies.",
   authors: [{ name: "Beichen Wang" }],
   keywords: [
     "Beichen Wang",
+    "Wageningen University & Research",
+    "SoilWise",
     "soil science",
     "knowledge graphs",
+    "large language models",
+    "NLP",
     "semantic web",
     "ontology",
-    "SKOS",
-    "PhD researcher",
+    "RDF",
+    "SPARQL",
+    "RAG",
+    "PhD candidate",
   ],
   openGraph: {
     title: "Beichen Wang",
     description:
-      "PhD researcher in soil science and knowledge engineering. Building knowledge graphs and ontologies for soil data interoperability.",
+      "PhD candidate at Wageningen University & Research working on soil health knowledge graphs, controlled vocabularies, and RAG-based question answering.",
     type: "website",
     url: "https://wangbeichen.com",
   },

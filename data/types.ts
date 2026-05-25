@@ -41,7 +41,7 @@ export type ContactEntry = {
 
 export type Project = {
   title: string;
-  image: string;
+  image?: string;
   techStack: string[];
   href?: string;
   description?: string;

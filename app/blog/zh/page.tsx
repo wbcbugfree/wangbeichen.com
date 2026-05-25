@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -32,17 +31,6 @@ export default function ZhBlogIndex() {
           {posts.map((post) => (
             <article key={post.slug} className="py-8 first:pt-0">
               <Link href={`/blog/zh/${post.slug}`} className="group block">
-                {post.coverImage && (
-                  <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-3">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 672px"
-                    />
-                  </div>
-                )}
                 <time className="text-meta text-xs">{formatDate(post.date)}</time>
                 <h2 className="heading-panel mt-1 group-hover:underline">
                   {post.title}

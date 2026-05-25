@@ -15,7 +15,7 @@ const BLOG_DIR = join(ROOT, "content", "blog");
 const PUBLIC_DIR = join(ROOT, "public");
 
 const SITE_URL = "https://wangbeichen.com";
-const AUTHOR = { name: "Beichen Wang", email: "beichen.wang@example.com", link: SITE_URL };
+const AUTHOR = { name: "Beichen Wang", email: "beichen.wang@wur.nl", link: SITE_URL };
 
 function getSlug(filename) {
   return filename.replace(/\.mdx?$/, "");

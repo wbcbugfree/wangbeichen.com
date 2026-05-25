@@ -13,55 +13,53 @@ export type { ContactEntry, Project, ProjectCategory, Publication } from "./type
 // ─── Hero ────────────────────────────────────────────────────
 export const heroData: HeroData = {
   greeting: "Hi, I am Beichen Wang",
-  titles: ["Soil Scientist", "Knowledge Engineer", "PhD Researcher"],
+  titles: ["PhD Candidate", "Knowledge Engineer", "Semantic Web Researcher", "AI Enthusiast"],
 };
 
 // ─── Research Interests (Skills) ─────────────────────────────
 export const skillsData: SkillsData = {
   skills:
-    "Knowledge Graphs, Soil Science, Semantic Web, NLP, Ontology Engineering, SKOS, RAG",
-  highlights: ["Knowledge Graphs", "Soil Science"],
+    "Knowledge Graphs, Semantic Web, LLMs, NLP, Ontologies, AI Applications, RAG, Agent",
+  highlights: ["Knowledge Graphs", "Semantic Web", "LLMs", "RAG"],
 };
 
 // ─── About ───────────────────────────────────────────────────
 export const aboutData: AboutData = {
   image: "/pic.png",
-  imageAlt: "Beichen Wang",
-  text: `I am a PhD researcher at [University Name] working at the intersection of soil science and artificial intelligence. My research focuses on building knowledge graphs and ontologies for soil science data, enabling semantic interoperability and intelligent retrieval across heterogeneous soil datasets. I am passionate about making soil knowledge more accessible, reusable, and machine-readable.`,
-  cvUrl: "/cv.pdf",  // Add your CV PDF path here (place file in /public/) or use a GitHub URL
+  imageAlt: "Beichen Wang (王北辰)",
+  text: `I am a PhD candidate at Wageningen University & Research, supervised by Prof. Dr. Anna Fensel and Dr. Luís Moreira de Sousa. Currently, I am engaged in the SoilWise Horizon Europe project, where I developed a soil health knowledge graph from unstructured text using large language models (LLMs). I'm also developing a controlled vocabulary dedicated to soil science and a RAG-based chatbot for soil-related question answering. My work combines LLMs and natural language processing with semantic web technologies, such as RDF knowledge graphs, ontologies, and SPARQL, to extract, integrate, and disseminate critical insights on soil health and soil science.`,
+  cvUrl: "/cv.pdf",
   education: [
     {
-      degree: "PhD in Soil Science / Knowledge Engineering",
-      institution: "University Name",
-      period: "2022 – present",
+      degree: "Master of Science in Electrical Engineering",
+      institution: "Delft University of Technology | Delft, the Netherlands",
+      period: "Sep 2021 - Aug 2023",
       description:
-        "Developing knowledge graphs and ontologies for soil science data interoperability. Advised by [Supervisor Name].",
+        "Track: Wireless Communication and Sensing. Thesis: Linear Clustering Process on Networks.",
     },
     {
-      degree: "MSc in [Field]",
-      institution: "University Name",
-      period: "2019 – 2022",
-      description: "Thesis on [topic].",
-    },
-    {
-      degree: "BSc in [Field]",
-      institution: "University Name",
-      period: "2015 – 2019",
+      degree: "Bachelor of Engineering in Telecommunication Engineering",
+      institution:
+        "Beijing University of Posts and Telecommunications | Beijing, China",
+      period: "Sep 2016 - Jun 2020",
+      description:
+        "Thesis: Object Detection in Microscope Images Based on Deep Learning.",
     },
   ],
   experience: [
     {
-      role: "Research Assistant",
-      organization: "University Name",
-      period: "2022 – present",
+      role: "PhD Candidate",
+      organization: "Wageningen University & Research | Wageningen, the Netherlands",
+      period: "Apr 2024 - Mar 2028",
       description:
-        "Building the Soil Health Knowledge Graph and SoilBot RAG system. Maintaining the Soil Vocabulary Browser (Skosmos instance).",
+        "Developing ontology-compliant soil health knowledge graph from unstructured text with LLMs, plus soil science vocabularies and RAG-based agentic chatbot.",
     },
     {
-      role: "Teaching Assistant",
-      organization: "University Name",
-      period: "2023 – present",
-      description: "Courses: Introduction to Knowledge Graphs, Semantic Web Technologies.",
+      role: "Natural Language Processing Research Assistant",
+      organization: "iFLYTEK | Beijing, China",
+      period: "Nov 2020 - Jul 2021",
+      description:
+        "Worked on machine-reading-comprehension methods for legal factor extraction.",
     },
   ],
 };
@@ -70,59 +68,46 @@ export const aboutData: AboutData = {
 export const contactData: ContactEntry[] = [
   {
     type: "Email",
-    value: "b.wang@university.edu",
-    href: "mailto:b.wang@university.edu",
+    value: "beichen.wang@wur.nl",
+    href: "mailto:beichen.wang@wur.nl",
   },
   {
     type: "GitHub",
-    value: "github.com/beichenwang",
-    href: "https://github.com/beichenwang",
+    value: "github.com/wbcbugfree",
+    href: "https://github.com/wbcbugfree",
   },
   {
     type: "Google Scholar",
     value: "Scholar Profile",
-    href: "https://scholar.google.com/citations?user=PLACEHOLDER",
+    href: "https://scholar.google.com/citations?user=SiU_-YEAAAAJ",
   },
   {
     type: "LinkedIn",
-    value: "linkedin.com/in/beichenwang",
-    href: "https://linkedin.com/in/beichenwang",
+    value: "linkedin.com/in/beichen-wang",
+    href: "https://linkedin.com/in/beichen-wang",
   },
   {
     type: "ORCID",
-    value: "0000-0000-0000-0000",
-    href: "https://orcid.org/0000-0000-0000-0000",
+    value: "0009-0008-5213-5114",
+    href: "https://orcid.org/0009-0008-5213-5114",
+  },
+  {
+    type: "ResearchGate",
+    value: "researchgate.net/profile/Beichen-Wang-8",
+    href: "https://www.researchgate.net/profile/Beichen-Wang-8",
   },
 ];
 
 // ─── Projects & Demos ────────────────────────────────────────
 export const projectCategories: ProjectCategory[] = [
   {
-    category: "Research Projects",
+    category: "Projects",
     projects: [
       {
-        title: "Soil Health Knowledge Graph",
-        image: "/projects/placeholder.png",
+        title: "SoilWise Horizon Europe",
         description:
-          "A knowledge graph for soil science that integrates heterogeneous soil datasets using SKOS, OWL, and RDF. Enables semantic querying across soil health indicators and land-use classifications.",
-        techStack: ["RDF", "OWL", "SKOS", "SPARQL", "Python"],
-        githubUrl: "https://github.com/beichenwang/soil-health-kg",
-      },
-      {
-        title: "Soil Vocabulary Browser",
-        image: "/projects/placeholder.png",
-        description:
-          "A Skosmos-based vocabulary browser for soil science controlled vocabularies. Provides a human-readable interface for exploring SKOS concept schemes used in soil data standards.",
-        techStack: ["Skosmos", "SKOS", "PHP", "Docker"],
-        demoUrl: "https://vocab.wangbeichen.com",
-      },
-      {
-        title: "SoilBot",
-        image: "/projects/placeholder.png",
-        description:
-          "A knowledge graph–augmented RAG chatbot for soil science. Answers natural language questions about soil health by retrieving context from the Soil Health Knowledge Graph.",
-        techStack: ["RAG", "LLM", "SPARQL", "Python", "FastAPI"],
-        demoUrl: "https://soilbot.wangbeichen.com",
+          "PhD research project on soil health knowledge graphs, controlled vocabularies, and chatbot-based access to soil science knowledge.",
+        techStack: ["LLM", "RDF", "SPARQL"],
       },
     ],
   },
@@ -132,42 +117,49 @@ export const projectCategories: ProjectCategory[] = [
 export const publicationsData: Publication[] = [
   {
     title:
-      "Towards a Soil Health Knowledge Graph: Semantic Integration of Heterogeneous Soil Datasets",
-    authors: ["Beichen Wang", "Jane Doe", "John Smith"],
-    venue: "K-CAP 2025: Knowledge Capture Conference",
+      "Make soil healthy again: Construction of ontology-compliant soil health knowledge graph with large language models",
+    authors: ["Beichen Wang", "Luís Moreira de Sousa", "Anna Fensel"],
+    venue: "K-CAP 25: the 13th Knowledge Capture Conference 2025",
     year: 2025,
     type: "conference",
-    paperUrl: "https://doi.org/10.1145/placeholder",
-    codeUrl: "https://github.com/beichenwang/soil-health-kg",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    slidesUrl: "/slides/kcap2025-slides.pdf",
+    paperUrl: "https://doi.org/10.1145/3731443.3771730",
     abstract:
-      "We present a knowledge graph framework for integrating heterogeneous soil science datasets using SKOS, OWL, and SPARQL. Our approach enables semantic querying across soil health indicators, land-use classifications, and environmental measurements from multiple national soil monitoring programmes.",
+      "Construction of an ontology-compliant soil health knowledge graph from unstructured text using large language models.",
     highlight: true,
   },
   {
     title:
-      "SoilBot: A Knowledge Graph–Augmented Retrieval System for Soil Science Question Answering",
-    authors: ["Beichen Wang", "Jane Doe"],
-    venue: "ISWC 2024: International Semantic Web Conference (Poster)",
+      "Linear clustering process on networks: a comparative study",
+    authors: ["Ivan Jokić", "Beichen Wang", "Piet Van Mieghem"],
+    venue: "Journal of Complex Networks",
     year: 2024,
-    type: "conference",
-    paperUrl: "https://doi.org/10.1007/placeholder",
-    codeUrl: "https://github.com/beichenwang/soilbot",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    slidesUrl: "/slides/iswc2024-slides.pdf",
-    abstract:
-      "SoilBot is a retrieval-augmented generation system that uses the Soil Health Knowledge Graph as its knowledge base. It translates natural language queries into SPARQL and combines structured retrieval with large language model generation.",
+    type: "journal",
+    paperUrl: "https://doi.org/10.1093/comnet/cnae022",
   },
   {
     title:
-      "SKOS-based Vocabulary Alignment for Interoperable Soil Classification Systems",
-    authors: ["Beichen Wang", "Alice Brown", "John Smith"],
-    venue: "Applied Ontology",
-    year: 2024,
-    type: "journal",
-    paperUrl: "https://doi.org/10.3233/placeholder",
-    // videoUrl: "https://www.youtube.com/watch?v=...",
-    // slidesUrl: "/slides/appliedontology2024-slides.pdf",
+      "Various Legal Factors Extraction Based on Machine Reading Comprehension",
+    authors: [
+      "Beichen Wang",
+      "Ziyue Wang",
+      "Baoxin Wang",
+      "Dayong Wu",
+      "Zhigang Chen",
+      "Shijin Wang",
+      "Guoping Hu",
+    ],
+    venue: "Information Retrieval - 27th China Conference, CCIR 2021",
+    year: 2021,
+    type: "conference",
+    paperUrl: "https://doi.org/10.1007/978-3-030-88189-4_2",
+  },
+  {
+    title: "Linear Clustering Process on Networks",
+    authors: ["Beichen Wang"],
+    venue: "Master's thesis, Delft University of Technology",
+    year: 2023,
+    type: "thesis",
+    paperUrl:
+      "https://resolver.tudelft.nl/uuid:41dc9ae8-2055-47d1-bb0a-a870cc076cdc",
   },
 ];

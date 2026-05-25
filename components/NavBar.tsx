@@ -82,6 +82,8 @@ export default function NavBar() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // The theme toggle depends on browser-only APIs, so it hydrates after mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const stored = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -71,19 +70,6 @@ export default async function ZhBlogPost({
           </div>
         )}
       </header>
-
-      {post.coverImage && (
-        <div className="relative aspect-video w-full overflow-hidden rounded-xl mb-10">
-          <Image
-            src={post.coverImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 672px"
-            priority
-          />
-        </div>
-      )}
 
       <hr className="mb-10 border-black dark:border-white/10" />
 

@@ -1,9 +1,6 @@
-import Image from "next/image";
 import type { Publication } from "@/data/types";
 import { CloseButton } from "./ui/CloseButton";
 import { SectionHeading_Clickable } from "./ui/SectionHeading_Clickable";
-
-const PLACEHOLDER = "/projects/placeholder.png";
 
 type PublicationsSectionProps = {
   data: Publication[];
@@ -30,8 +27,7 @@ export function PublicationsSection({
           </span>
         </div>
 
-        {/* 2-column card grid — same visual style as Projects & Demos */}
-        <div className="mt-3 grid grid-cols-2 gap-2 overflow-hidden flex-1 min-h-0 content-start">
+      <div className="mt-3 grid grid-cols-2 gap-2 overflow-hidden flex-1 min-h-0 content-start">
           {data.map((pub) => (
             <CollapsedPubCard key={pub.title} pub={pub} />
           ))}
@@ -63,7 +59,6 @@ export function PublicationsSection({
               <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
                 {year}
               </p>
-              {/* 2-column card grid — mirrors Projects & Demos expanded layout */}
               <div className="grid grid-cols-2 gap-6">
                 {byYear[year].map((pub) => (
                   <ExpandedPubCard key={pub.title} pub={pub} />
@@ -77,8 +72,6 @@ export function PublicationsSection({
   );
 }
 
-// ── Collapsed card (ProjectCard style) ────────────────────────────────────────
-
 function CollapsedPubCard({ pub }: { pub: Publication }) {
   const href = pub.paperUrl ?? pub.codeUrl ?? pub.videoUrl ?? pub.slidesUrl;
   const CardWrapper = href ? "a" : "div";
@@ -89,41 +82,29 @@ function CollapsedPubCard({ pub }: { pub: Publication }) {
   return (
     <CardWrapper
       {...cardProps}
-      className="relative group block overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg text-left w-full"
+      className="group block rounded-2xl border border-black/10 bg-card p-3 text-left transition-shadow hover:shadow-lg dark:border-white/10"
     >
-      {/* Image */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
-        <Image
-          src={pub.image ?? PLACEHOLDER}
-          alt={pub.title}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 50vw, 20vw"
-        />
-      </div>
-
-      {/* Footer overlay — title + year/type */}
-      <div className="absolute bottom-0 w-full flex items-end justify-between px-3 py-1.5 bg-white/85 dark:bg-black/70 backdrop-blur-sm">
+      <div className="flex min-h-24 flex-col justify-between gap-3">
         <h4 className="heading-card text-foreground line-clamp-1 flex-1 min-w-0 pr-2">
           {pub.title}
         </h4>
-        <span className="text-meta shrink-0 text-[10px]">
-          {pub.year}
-          {pub.highlight && (
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-meta shrink-0 text-[10px]">
+            {pub.year}
+          </span>
+          {pub.highlight ? (
             <span
-              className="ml-1 rounded px-1 py-px text-white text-[10px]"
+              className="rounded px-1 py-px text-white text-[10px]"
               style={{ backgroundColor: "var(--site-accent)" }}
             >
               ★
             </span>
-          )}
-        </span>
+          ) : null}
+        </div>
       </div>
     </CardWrapper>
   );
 }
-
-// ── Expanded card (ProjectCard style + publication metadata below) ─────────────
 
 function ExpandedPubCard({ pub }: { pub: Publication }) {
   const href = pub.paperUrl ?? pub.codeUrl;
@@ -133,34 +114,11 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
     : {};
 
   return (
-    <div className="flex flex-col gap-2">
-      {/* Image card — identical to ProjectCard */}
-      <CardWrapper
-        {...cardProps}
-        className="relative group block overflow-hidden rounded-2xl bg-card transition-shadow hover:shadow-lg"
-      >
-        <div className="relative aspect-2/1 w-full overflow-hidden">
-          <Image
-            src={pub.image ?? PLACEHOLDER}
-            alt={pub.title}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 40vw"
-          />
-        </div>
-        {/* Footer overlay */}
-        <div className="absolute bottom-0 w-full flex items-center justify-between px-4 py-1 bg-white/80 dark:bg-black/70">
-          <h4 className="heading-card text-foreground line-clamp-1 flex-1 min-w-0 pr-2">
-            {pub.title}
-          </h4>
-          <div className="flex items-center gap-2 shrink-0">
-            <TypeBadge type={pub.type} />
-          </div>
-        </div>
-      </CardWrapper>
-
-      {/* Metadata below the card */}
-      <div className="px-1">
+    <CardWrapper
+      {...cardProps}
+      className="group block rounded-2xl border border-black/10 bg-card p-5 transition-shadow hover:shadow-lg dark:border-white/10"
+    >
+      <div>
         {pub.highlight && (
           <span
             className="mb-1 inline-block rounded px-2 py-0.5 text-xs font-medium text-white"
@@ -169,7 +127,12 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
             Featured
           </span>
         )}
-        <p className="text-sm leading-snug font-medium">{pub.title}</p>
+        <div className="mb-2 flex items-start justify-between gap-3">
+          <p className="text-sm leading-snug font-medium group-hover:underline">
+            {pub.title}
+          </p>
+          <TypeBadge type={pub.type} />
+        </div>
         <p className="mt-1 text-xs text-gray-600">
           {pub.authors.map((author, i) => (
             <span key={`${author}-${i}`}>
@@ -236,7 +199,7 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
           )}
         </div>
       </div>
-    </div>
+    </CardWrapper>
   );
 }
 

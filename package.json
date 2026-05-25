@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "generate-rss": "node scripts/generate-rss.mjs",
-    "translate": "node scripts/translate.mjs"
+    "translate": "node scripts/translate.mjs",
+    "deploy:pi": "powershell -ExecutionPolicy Bypass -File scripts/deploy-pi.ps1"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
