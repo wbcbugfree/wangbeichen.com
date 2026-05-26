@@ -31,6 +31,7 @@ export function WorkSection({
               <div key={project.title} className="flex flex-col gap-2">
                 <ProjectCard
                   title={project.title}
+                  image={project.image}
                   techStack={project.techStack}
                   href={project.href ?? project.demoUrl ?? project.registryUrl ?? project.githubUrl}
                 />

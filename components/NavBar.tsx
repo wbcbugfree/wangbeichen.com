@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { BLOG_ENABLED } from "@/lib/features";
 
 /** Return the English-version path for the current page. */
 function toEnPath(pathname: string): string {
@@ -120,19 +121,21 @@ export default function NavBar() {
           >
             Home
           </Link>
-          <Link
-            href="/blog"
-            className={`text-sm transition-colors ${
-              isBlogRoute
-                ? "font-semibold text-black dark:text-white"
-                : "text-gray-500 hover:text-black dark:hover:text-white"
-            }`}
-          >
-            Blog
-          </Link>
+          {BLOG_ENABLED && (
+            <Link
+              href="/blog"
+              className={`text-sm transition-colors ${
+                isBlogRoute
+                  ? "font-semibold text-black dark:text-white"
+                  : "text-gray-500 hover:text-black dark:hover:text-white"
+              }`}
+            >
+              Blog
+            </Link>
+          )}
 
           {/* Language toggle — only visible on blog routes; both labels always clickable */}
-          {isBlogRoute && (
+          {BLOG_ENABLED && isBlogRoute && (
             <div className="flex items-center gap-1 text-xs border border-gray-300 dark:border-white/20 rounded-full px-2 py-0.5">
               <Link
                 href={enHref}

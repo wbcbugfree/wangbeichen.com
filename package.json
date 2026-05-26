@@ -6,6 +6,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/generate-rss.mjs",
     "build": "next build",
+    "postbuild": "node scripts/prune-disabled-routes.mjs",
     "start": "next start",
     "lint": "eslint",
     "generate-rss": "node scripts/generate-rss.mjs",

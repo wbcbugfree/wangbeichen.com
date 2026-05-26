@@ -31,7 +31,7 @@ const CONSTRAINTS = {
   minBottomMiddleWidth: 30,
   maxBottomMiddleWidth: 80,
   minAboutHeight: 30,
-  maxAboutHeight: 70,
+  maxAboutHeight: 82,
 };
 
 const LERP_FACTOR = 0.15;
@@ -41,7 +41,7 @@ const DEFAULT_SIZES: PanelSizes = {
   topLeftWidth: 55,
   bottomLeftWidth: 30,      // Projects: 30%
   bottomMiddleWidth: 65,    // Projects (30%) + Publications (35%) = 65%
-  bottomRightTopHeight: 60,
+  bottomRightTopHeight: 72,  // About: 72%, Contact: 28%
 };
 
 export function useResizablePanels(

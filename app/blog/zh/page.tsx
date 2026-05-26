@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { BLOG_ENABLED } from "@/lib/features";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function ZhBlogIndex() {
+  if (!BLOG_ENABLED) notFound();
+
   const posts = getAllPosts("zh");
 
   return (

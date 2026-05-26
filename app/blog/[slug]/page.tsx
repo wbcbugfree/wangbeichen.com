@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { BLOG_ENABLED } from "@/lib/features";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -34,6 +36,8 @@ export default async function BlogPost({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (!BLOG_ENABLED) notFound();
+
   const { slug } = await params;
   const post = getPostBySlug(slug);
 

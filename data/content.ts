@@ -136,6 +136,7 @@ export const projectCategories: ProjectCategory[] = [
     projects: [
       {
         title: "EU SoilVoc",
+        image: "/projects/soilwise-logo.svg",
         description:
           "A EU-wide SKOS-based thesaurus dedicated to soil science, developed in the SoilWise Horizon Europe project.",
         techStack: ["SKOS", "RDF", "Controlled Vocabularies", "Ontologies"],

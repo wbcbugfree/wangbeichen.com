@@ -27,7 +27,7 @@ export function PublicationsSection({
           </span>
         </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2 overflow-hidden flex-1 min-h-0 content-start">
+        <div className="mt-3 flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto pr-1">
           {data.map((pub) => (
             <CollapsedPubCard key={pub.title} pub={pub} />
           ))}
