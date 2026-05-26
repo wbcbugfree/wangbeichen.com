@@ -91,6 +91,24 @@ export function AboutSection({
                 </div>
               </div>
             )}
+
+            {data.talks && data.talks.length > 0 && (
+              <div>
+                <h4 className="heading-card mb-4 font-semibold uppercase tracking-widest text-xs">
+                  Talks
+                </h4>
+                <div className="space-y-4 border-l-2 border-foreground/20 pl-5">
+                  {data.talks.map((entry, i) => (
+                    <div key={i} className="relative">
+                      <span className="absolute -left-[1.45rem] top-[0.35rem] h-2.5 w-2.5 rounded-full bg-foreground/60" />
+                      <p className="text-meta text-xs">{entry.date}</p>
+                      <p className="font-semibold text-sm mt-0.5">{entry.title}</p>
+                      <p className="text-meta text-xs mt-1 leading-relaxed">{entry.event}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

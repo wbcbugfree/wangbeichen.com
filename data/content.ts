@@ -19,7 +19,7 @@ export const heroData: HeroData = {
 // ─── Research Interests (Skills) ─────────────────────────────
 export const skillsData: SkillsData = {
   skills:
-    "Knowledge Graphs, Semantic Web, LLMs, NLP, Ontologies, AI Applications, RAG, Agent",
+    "Knowledge Graphs, Semantic Web, LLMs, NLP, AI Applications, RAG, Agent, Ontologies",
   highlights: ["Knowledge Graphs", "Semantic Web", "LLMs", "RAG"],
 };
 
@@ -60,6 +60,37 @@ export const aboutData: AboutData = {
       period: "Nov 2020 - Jul 2021",
       description:
         "Worked on machine-reading-comprehension methods for legal factor extraction.",
+    },
+  ],
+  talks: [
+    {
+      title:
+        "Make soil healthy again: Construction of ontology-compliant soil health knowledge graph with large language models",
+      event:
+        "K-CAP '25: the 13th Knowledge Capture Conference 2025 | Dayton, Ohio, USA",
+      date: "Dec 10, 2025",
+    },
+    {
+      title: "Soil health knowledge graph: Current progress, use cases and future work",
+      event: "OpenGeoHub | Doorwerth, the Netherlands",
+      date: "Aug 21, 2025",
+    },
+    {
+      title:
+        "Constructing knowledge graphs from text using LLMs: Current progress, open challenges and future work",
+      event:
+        "Artificial Intelligence Chair Group | Wageningen University, the Netherlands",
+      date: "Dec 2, 2024",
+    },
+    {
+      title: "Soil health knowledge graph: Iteration I",
+      event: "SoilWise Annual Meeting | CREA AA, Florence, Italy",
+      date: "Oct 29, 2024",
+    },
+    {
+      title: "Linear clustering process on networks",
+      event: "Computational Network Science Lab | Leiden University, the Netherlands",
+      date: "Sep 28, 2023",
     },
   ],
 };
@@ -104,10 +135,13 @@ export const projectCategories: ProjectCategory[] = [
     category: "Projects",
     projects: [
       {
-        title: "SoilWise Horizon Europe",
+        title: "EU SoilVoc",
         description:
-          "PhD research project on soil health knowledge graphs, controlled vocabularies, and chatbot-based access to soil science knowledge.",
-        techStack: ["LLM", "RDF", "SPARQL"],
+          "A EU-wide SKOS-based thesaurus dedicated to soil science, developed in the SoilWise Horizon Europe project.",
+        techStack: ["SKOS", "RDF", "Controlled Vocabularies", "Ontologies"],
+        demoUrl: "https://soilvoc.wangbeichen.com",
+        registryUrl: "https://w3id.org/eusoilvoc",
+        githubUrl: "https://github.com/soilwise-he/soil-vocabs",
       },
     ],
   },
@@ -123,9 +157,15 @@ export const publicationsData: Publication[] = [
     year: 2025,
     type: "conference",
     paperUrl: "https://doi.org/10.1145/3731443.3771730",
+    pdfUrl:
+      "/publications/Wang%20-%202025%20-%20Make%20soil%20healthy%20again%20Construction%20of%20ontology-compliant%20soil%20health%20knowledge%20graph%20with%20large%20l.pdf",
     abstract:
       "Construction of an ontology-compliant soil health knowledge graph from unstructured text using large language models.",
     highlight: true,
+    image: "/publications/text2KG.svg",
+    codeUrl: "https://github.com/soilwise-he/soil-health-knowledge-graph",
+    videoUrl: "https://youtu.be/3D7_ZEPk6kE",
+    endpointUrl: "https://sparql.soilwise.wetransform.eu/sparql/",
   },
   {
     title:
@@ -135,6 +175,10 @@ export const publicationsData: Publication[] = [
     year: 2024,
     type: "journal",
     paperUrl: "https://doi.org/10.1093/comnet/cnae022",
+    pdfUrl:
+      "/publications/Joki%C4%87%20-%202024%20-%20Linear%20clustering%20process%20on%20networks%20a%20comparative%20study.pdf",
+    coverVideo: "/publications/lcp.mp4",
+    codeUrl: "https://github.com/wbcbugfree/linear-clustering-process",
   },
   {
     title:
@@ -152,6 +196,9 @@ export const publicationsData: Publication[] = [
     year: 2021,
     type: "conference",
     paperUrl: "https://doi.org/10.1007/978-3-030-88189-4_2",
+    pdfUrl:
+      "/publications/Wang%20-%202021%20-%20Various%20Legal%20Factors%20Extraction%20Based%20on%20Machine%20Reading%20Comprehension.pdf",
+    image: "/publications/legal.svg",
   },
   {
     title: "Linear Clustering Process on Networks",
@@ -161,5 +208,8 @@ export const publicationsData: Publication[] = [
     type: "thesis",
     paperUrl:
       "https://resolver.tudelft.nl/uuid:41dc9ae8-2055-47d1-bb0a-a870cc076cdc",
+    pdfUrl: "/publications/MSc_Thesis_Beichen_Wang.pdf",
+    image: "/publications/lcp-thesis-cover.png",
+    codeUrl: "https://github.com/wbcbugfree/linear-clustering-process",
   },
 ];

@@ -32,7 +32,7 @@ export function WorkSection({
                 <ProjectCard
                   title={project.title}
                   techStack={project.techStack}
-                  href={project.href ?? project.demoUrl ?? project.githubUrl}
+                  href={project.href ?? project.demoUrl ?? project.registryUrl ?? project.githubUrl}
                 />
                 {isExpanded && (
                   <div className="px-1">
@@ -51,6 +51,16 @@ export function WorkSection({
                           style={{ backgroundColor: "var(--site-accent)" }}
                         >
                           ↗ Live Demo
+                        </a>
+                      )}
+                      {project.registryUrl && (
+                        <a
+                          href={project.registryUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                        >
+                          Registry
                         </a>
                       )}
                       {project.paperUrl && (

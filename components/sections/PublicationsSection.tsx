@@ -84,22 +84,25 @@ function CollapsedPubCard({ pub }: { pub: Publication }) {
       {...cardProps}
       className="group block rounded-2xl border border-black/10 bg-card p-3 text-left transition-shadow hover:shadow-lg dark:border-white/10"
     >
-      <div className="flex min-h-24 flex-col justify-between gap-3">
-        <h4 className="heading-card text-foreground line-clamp-1 flex-1 min-w-0 pr-2">
-          {pub.title}
-        </h4>
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-meta shrink-0 text-[10px]">
-            {pub.year}
-          </span>
-          {pub.highlight ? (
-            <span
-              className="rounded px-1 py-px text-white text-[10px]"
-              style={{ backgroundColor: "var(--site-accent)" }}
-            >
-              ★
+      <div className="flex min-h-24 flex-col gap-2">
+        <PublicationCover pub={pub} variant="thumbnail" />
+        <div className="flex min-h-0 flex-1 flex-col justify-between gap-2">
+          <h4 className="heading-card text-foreground line-clamp-2 flex-1 min-w-0 pr-2">
+            {pub.title}
+          </h4>
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-meta shrink-0 text-[10px]">
+              {pub.year}
             </span>
-          ) : null}
+            {pub.highlight ? (
+              <span
+                className="rounded px-1 py-px text-white text-[10px]"
+                style={{ backgroundColor: "var(--site-accent)" }}
+              >
+                ★
+              </span>
+            ) : null}
+          </div>
         </div>
       </div>
     </CardWrapper>
@@ -107,18 +110,12 @@ function CollapsedPubCard({ pub }: { pub: Publication }) {
 }
 
 function ExpandedPubCard({ pub }: { pub: Publication }) {
-  const href = pub.paperUrl ?? pub.codeUrl;
-  const CardWrapper = href ? "a" : "div";
-  const cardProps = href
-    ? { href, target: "_blank" as const, rel: "noopener noreferrer" }
-    : {};
-
   return (
-    <CardWrapper
-      {...cardProps}
+    <div
       className="group block rounded-2xl border border-black/10 bg-card p-5 transition-shadow hover:shadow-lg dark:border-white/10"
     >
       <div>
+        <PublicationCover pub={pub} variant="full" />
         {pub.highlight && (
           <span
             className="mb-1 inline-block rounded px-2 py-0.5 text-xs font-medium text-white"
@@ -157,9 +154,9 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
 
         {/* Links */}
         <div className="mt-2 flex flex-wrap gap-2">
-          {pub.paperUrl && (
+          {(pub.pdfUrl ?? pub.paperUrl) && (
             <a
-              href={pub.paperUrl}
+              href={pub.pdfUrl ?? pub.paperUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
@@ -174,7 +171,7 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
             >
-              Code
+              GitHub
             </a>
           )}
           {pub.videoUrl && (
@@ -184,7 +181,17 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
             >
-              Video
+              Presentation
+            </a>
+          )}
+          {pub.endpointUrl && (
+            <a
+              href={pub.endpointUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-full border border-black dark:border-white/30 px-3 py-1 text-xs font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+            >
+              SPARQL Endpoint
             </a>
           )}
           {pub.slidesUrl && (
@@ -199,11 +206,58 @@ function ExpandedPubCard({ pub }: { pub: Publication }) {
           )}
         </div>
       </div>
-    </CardWrapper>
+    </div>
   );
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+function PublicationCover({
+  pub,
+  variant,
+}: {
+  pub: Publication;
+  variant: "thumbnail" | "full";
+}) {
+  if (!pub.image && !pub.coverVideo) return null;
+
+  const isThumbnail = variant === "thumbnail";
+  const mediaClassName = isThumbnail
+    ? "h-full w-full object-cover object-center"
+    : "h-full w-full object-contain";
+
+  return (
+    <div
+      className={
+        isThumbnail
+          ? "h-11 overflow-hidden rounded-lg border border-black/10 bg-white dark:border-white/10"
+          : "mb-4 h-56 overflow-hidden rounded-xl border border-black/10 bg-white p-3 dark:border-white/10 lg:h-64"
+      }
+    >
+      {pub.coverVideo ? (
+        <video
+          src={pub.coverVideo}
+          aria-label={`${pub.title} cover video`}
+          className={mediaClassName}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload={isThumbnail ? "metadata" : "auto"}
+        />
+      ) : (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={pub.image}
+            alt={`${pub.title} cover`}
+            className={mediaClassName}
+          />
+        </>
+      )}
+    </div>
+  );
+}
 
 function typeLabel(type: Publication["type"]): string {
   return { conference: "Conference", journal: "Journal", preprint: "Preprint", thesis: "Thesis" }[type];

@@ -24,6 +24,12 @@ export type ExperienceEntry = {
   description?: string;
 };
 
+export type TalkEntry = {
+  title: string;
+  event: string;
+  date: string;
+};
+
 export type AboutData = {
   image: string;
   imageAlt: string;
@@ -31,6 +37,7 @@ export type AboutData = {
   cvUrl?: string;
   education?: EducationEntry[];
   experience?: ExperienceEntry[];
+  talks?: TalkEntry[];
 };
 
 export type ContactEntry = {
@@ -46,6 +53,7 @@ export type Project = {
   href?: string;
   description?: string;
   demoUrl?: string;
+  registryUrl?: string;
   paperUrl?: string;
   githubUrl?: string;
 };
@@ -62,12 +70,15 @@ export type Publication = {
   year: number;
   type: "conference" | "journal" | "preprint" | "thesis";
   paperUrl?: string;
+  pdfUrl?: string;
   codeUrl?: string;
   slidesUrl?: string;
   videoUrl?: string;
+  endpointUrl?: string;
   abstract?: string;
   highlight?: boolean;
   image?: string;
+  coverVideo?: string;
 };
 
 export type SiteData = {
